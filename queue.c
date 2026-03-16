@@ -67,3 +67,17 @@ void queue_free(Queue *queue)
   free(queue);
 }
 
+void another_queue_free(Queue **queue){
+  if(!queue || !*queue){
+    printf("Invalid queue");
+    return;
+  }
+  if ((*queue)->data != NULL) {
+        free((*queue)->data);
+        (*queue)->data = NULL;
+  }
+  free(*queue);
+  *queue = NULL;
+  }
+
+
