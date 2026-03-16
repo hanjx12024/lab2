@@ -53,6 +53,10 @@ double back(Queue *queue)
     printf("invalid queue");
     return 0.0;
   }
+  if(!queue -> data){
+    printf("empty queue");
+    return 0.0;
+  }
   return queue->data[queue->size - 1];
 }
 
