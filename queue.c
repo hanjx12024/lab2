@@ -5,20 +5,29 @@
 Queue *queue_create(void)
 {
   Queue *queue = malloc(sizeof(Queue));
+  if(!queue) return NULL;
+
   queue->size = 0;
   queue->capacity = QUEUE_INITIAL_CAPACITY;
-  queue->data = malloc(sizeof(double) * queue->capacity);
+  double* temp = malloc(sizeof(double) * queue->capacity);
+  if (!temp) {
+    free(queue);
+    return NULL;
+  }
+  queue->data = temp;
   return queue;
 }
 
 void push(Queue *queue, double element)
 {
-
   if (queue->size == queue->capacity)
   {
     int capacity = queue->capacity * 2;
 
-    queue->data = realloc(queue->data, sizeof(double) * capacity);
+    double* temp = realloc(queue->data, sizeof(double) * capacity);
+    if(!temp)return;
+    queue->data = temp;
+
     queue->capacity = capacity;
   }
 
